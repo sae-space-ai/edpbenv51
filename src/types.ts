@@ -72,4 +72,4 @@ export interface ActionResult {
   [key: string]: any;
 }
 
-export type TabId = 'dashboard' | 'components' | 'aiact' | 'actions' | 'logs';
+export type TabId = 'dashboard' | 'components' | 'aiact' | 'actions' | 'logs' | 'deploy';
