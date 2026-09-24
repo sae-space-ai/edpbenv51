@@ -6,6 +6,7 @@ import ComponentsView from './components/ComponentsView';
 import AIActView from './components/AIActView';
 import ActionsView from './components/ActionsView';
 import LogsView from './components/LogsView';
+import DeployGuide from './components/DeployGuide';
 
 function App() {
   const [activeTab, setActiveTab] = useState<TabId>('dashboard');
@@ -66,6 +67,7 @@ function App() {
     { id: 'aiact', label: 'AI Act', icon: '📜' },
     { id: 'actions', label: 'Actions', icon: '⚡' },
     { id: 'logs', label: 'Logs', icon: '📋' },
+    { id: 'deploy', label: 'Deploy', icon: '🏗️' },
   ];
 
   if (loading) {
@@ -154,6 +156,9 @@ function App() {
         )}
         {activeTab === 'logs' && (
           <LogsView logs={logs} />
+        )}
+        {activeTab === 'deploy' && (
+          <DeployGuide />
         )}
       </main>
 
