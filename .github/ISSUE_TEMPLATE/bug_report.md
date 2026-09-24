@@ -2,8 +2,9 @@
 name: Bug report
 about: Create a report to help us improve
 title: ''
-labels: ''
-assignees: ''
+labels: accessibility
+assignees: pergolessi9-star
+type: Task
 
 ---
 
