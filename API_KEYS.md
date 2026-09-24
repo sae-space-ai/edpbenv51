@@ -1,6 +1,10 @@
-# EDPB-BACKEND v5.1 — APIs Gratuitas Disponibles
+# EDPB-BACKEND v5.1 — API KEYS GUIDE
 
 Guía completa de las 9 APIs gratuitas integradas en el ecosistema EDPB.
+
+**Autor:** Manuel Gago Fernández — Candidato EDPB SPE 2025-2030
+
+---
 
 ## Tabla Resumen
 
@@ -45,7 +49,7 @@ import requests
 
 response = requests.post(
     "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash:generateContent",
-    headers={"x-goog-api-key": GEMINI_API_KEY},
+    headers={"x-goog-api-key": os.getenv("GEMINI_API_KEY")},
     json={"contents": [{"parts": [{"text": prompt}]}]}
 )
 ```
@@ -76,7 +80,7 @@ vercel env add OPENROUTER_API_KEY
 response = requests.post(
     "https://openrouter.ai/api/v1/chat/completions",
     headers={
-        "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+        "Authorization": f"Bearer {os.getenv('OPENROUTER_API_KEY')}",
         "Content-Type": "application/json"
     },
     json={
@@ -110,7 +114,7 @@ vercel env add GROQ_API_KEY
 response = requests.post(
     "https://api.groq.com/openai/v1/chat/completions",
     headers={
-        "Authorization": f"Bearer {GROQ_API_KEY}",
+        "Authorization": f"Bearer {os.getenv('GROQ_API_KEY')}",
         "Content-Type": "application/json"
     },
     json={
@@ -145,7 +149,7 @@ vercel env add ALIBABA_BAILIAN_API_KEY
 response = requests.post(
     "https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation",
     headers={
-        "Authorization": f"Bearer {ALIBABA_BAILIAN_API_KEY}",
+        "Authorization": f"Bearer {os.getenv('ALIBABA_BAILIAN_API_KEY')}",
         "Content-Type": "application/json"
     },
     json={
@@ -179,7 +183,7 @@ vercel env add NVIDIA_API_KEY
 response = requests.post(
     "https://integrate.api.nvidia.com/v1/chat/completions",
     headers={
-        "Authorization": f"Bearer {NVIDIA_API_KEY}",
+        "Authorization": f"Bearer {os.getenv('NVIDIA_API_KEY')}",
         "Content-Type": "application/json"
     },
     json={
@@ -211,7 +215,7 @@ vercel env add MISTRAL_API_KEY
 response = requests.post(
     "https://api.mistral.ai/v1/chat/completions",
     headers={
-        "Authorization": f"Bearer {MISTRAL_API_KEY}",
+        "Authorization": f"Bearer {os.getenv('MISTRAL_API_KEY')}",
         "Content-Type": "application/json"
     },
     json={
@@ -242,7 +246,7 @@ vercel env add DEEPSEEK_API_KEY
 response = requests.post(
     "https://api.deepseek.com/v1/chat/completions",
     headers={
-        "Authorization": f"Bearer {DEEPSEEK_API_KEY}",
+        "Authorization": f"Bearer {os.getenv('DEEPSEEK_API_KEY')}",
         "Content-Type": "application/json"
     },
     json={
@@ -274,7 +278,7 @@ vercel env add CEREBRAS_API_KEY
 response = requests.post(
     "https://api.cerebras.ai/v1/chat/completions",
     headers={
-        "Authorization": f"Bearer {CEREBRAS_API_KEY}",
+        "Authorization": f"Bearer {os.getenv('CEREBRAS_API_KEY')}",
         "Content-Type": "application/json"
     },
     json={
@@ -313,9 +317,8 @@ vercel env add DATABASE_URL
 **Ejemplo de uso:**
 ```python
 import psycopg2
-from psycopg2.extras import execute_values
 
-conn = psycopg2.connect(DATABASE_URL)
+conn = psycopg2.connect(os.getenv("DATABASE_URL"))
 cur = conn.cursor()
 
 # Crear tabla con vector
@@ -327,20 +330,14 @@ cur.execute("""
     )
 """)
 
-# Insertar embedding
-cur.execute("""
-    INSERT INTO embeddings (text, embedding)
-    VALUES (%s, %s)
-""", (text, embedding_vector))
-
 conn.commit()
 ```
 
 ---
 
-## Configuración en Vercel
+## Configuración Rápida en Vercel
 
-### Método 1: Vercel CLI
+### Método 1: Vercel CLI (Recomendado)
 ```bash
 # Agregar todas las variables
 vercel env add GEMINI_API_KEY
@@ -382,28 +379,6 @@ vercel --prod
 1. **Primary:** Alibaba Bailian (70M tokens)
 2. **Secondary:** Mistral (1B tokens/mes)
 3. **Tertiary:** Groq (14400 RPD)
-
----
-
-## Monitoreo de Uso
-
-```python
-# Ejemplo de tracking de uso
-API_USAGE = {
-    "gemini": {"requests": 0, "last_used": None},
-    "openrouter": {"requests": 0, "last_used": None},
-    "groq": {"requests": 0, "last_used": None},
-    # ... etc
-}
-
-def track_api_usage(api_name):
-    API_USAGE[api_name]["requests"] += 1
-    API_USAGE[api_name]["last_used"] = datetime.now().isoformat()
-    
-    # Alertar si接近 límite
-    if API_USAGE[api_name]["requests"] > LIMITS[api_name] * 0.9:
-        log_warning(f"{api_name} approaching limit")
-```
 
 ---
 
