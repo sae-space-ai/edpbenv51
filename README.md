@@ -3,6 +3,7 @@
 [![Status](https://img.shields.io/badge/status-MVP-yellow)]()
 [![Fast-track](https://img.shields.io/badge/EDPB-SPE%202025--2030-blue)]()
 [![Vercel](https://img.shields.io/badge/deploy-Vercel-black)]()
+[![APIs](https://img.shields.io/badge/APIs%20gratuitas-9-green)]()
 
 Backend serverless para el ecosistema EDPB-SUPER-ECOSYSTEM v5.1.
 
@@ -14,6 +15,7 @@ Backend serverless para el ecosistema EDPB-SUPER-ECOSYSTEM v5.1.
 - **31 componentes** organizados en 5 categorías
 - **58 artículos AI Act** mapeados (Art. 5-62, incluyendo GPAI 44-55)
 - **15 endpoints** (12 GET + 3 POST)
+- **9 APIs gratuitas** integradas (sin tarjeta de crédito)
 - **3 motores internos** (AutoRepair, Continuous, Orchestrator)
 - **Telemetría en tiempo real** con latencia y errores
 - **Auto-reparación** de componentes caídos
@@ -28,12 +30,29 @@ edpb-backend/
 ├── requirements.txt           <- Dependencias (requests)
 ├── vercel.json                <- Config Vercel serverless
 ├── .gitignore                 <- Exclusiones Git
-└── README.md                  <- Documentación
+├── README.md                  <- Documentación
+└── APIS.md                    <- Guía de APIs gratuitas
 ```
+
+## 9 APIs Gratuitas Integradas
+
+| # | API | Modelo Principal | Límite Gratuito | Variable |
+|---|-----|------------------|-----------------|----------|
+| 1 | Google AI Studio | gemini-3-flash | 15 RPM / 1500 RPD | `GEMINI_API_KEY` |
+| 2 | OpenRouter | nemotron-3-ultra, qwen3, glm-5.2, llama-4 | 20 RPM / 50 RPD | `OPENROUTER_API_KEY` |
+| 3 | Groq | llama-3.3-70b, qwen-3 | 30 RPM / 14400 RPD | `GROQ_API_KEY` |
+| 4 | Alibaba Bailian | Qwen3, DeepSeek, GLM, Kimi | 70M tokens gratis | `ALIBABA_BAILIAN_API_KEY` |
+| 5 | NVIDIA NIM | GLM-5.2, Llama-4 | 40 RPM / 1000 RPD | `NVIDIA_API_KEY` |
+| 6 | Mistral | mistral-small | 1 RPS / 1B tokens/mes | `MISTRAL_API_KEY` |
+| 7 | DeepSeek | deepseek-v3.2 | 60 RPM | `DEEPSEEK_API_KEY` |
+| 8 | Cerebras | llama-3.1-8b | 30 RPM / 14400 RPD | `CEREBRAS_API_KEY` |
+| 9 | Vercel Postgres | PostgreSQL + pgvector | Free tier | `DATABASE_URL` |
+
+**Ver [APIS.md](./APIS.md) para documentación completa de cada API.**
 
 ## Componentes (31)
 
-### Generative AI (7)
+### Módulo 1 — Generative AI (7)
 | Modelo | Rol | Licencia |
 |--------|-----|----------|
 | qwen3 | general_llm | Apache-2.0 |
@@ -44,7 +63,7 @@ edpb-backend/
 | llama_4_scout | long_context_llm | Llama |
 | kimi_k3 | frontier_llm | Kimi |
 
-### Cybersecurity (8)
+### Módulo 2 — Cybersecurity (8)
 | Herramienta | Rol | Modo |
 |-------------|-----|------|
 | strix | autonomous_pentest | dry-run |
@@ -56,14 +75,14 @@ edpb-backend/
 | metasploit | exploitation | lab-only |
 | recon_ng | osint | passive |
 
-### Databases (3)
+### Módulo 3 — Databases (3)
 | Base de Datos | Rol | Fortaleza |
 |---------------|-----|-----------|
 | pgvector | vector_store | WAL+PITR |
 | milvus | billion_scale | recall |
 | qdrant | low_latency | filtering |
 
-### Sub-Agents (8)
+### Módulo 4 — Sub-Agents (8)
 | Agente | Provider |
 |--------|----------|
 | ai_governance | qwen3 |
@@ -75,7 +94,7 @@ edpb-backend/
 | training_designer | gemma_4 |
 | evidence_engine | phi_4_mini |
 
-### Gigafactories (5)
+### Módulo 5 — Gigafactories (5)
 | Factoría | Agentes | Auth |
 |----------|---------|------|
 | nexus_agi | 133 | No |
@@ -111,64 +130,35 @@ edpb-backend/
 | `/api/test` | Test completo ecosistema |
 | `/api/action` | Acción específica |
 
-## Acciones Disponibles (14)
+## 6 Habilidades del Arquitecto
 
-```json
-{
-  "action": "status"
-}
-{
-  "action": "start_engine"
-}
-{
-  "action": "stop_engine"
-}
-{
-  "action": "health_check"
-}
-{
-  "action": "repair_component",
-  "category": "generative_ai",
-  "name": "qwen3"
-}
-{
-  "action": "dispatch_subagent",
-  "agent_name": "ai_governance",
-  "task": "Analizar cumplimiento Art. 9"
-}
-{
-  "action": "generate_evidence",
-  "article": "Art. 9",
-  "context": {"organization": "ACME Corp"}
-}
-{
-  "action": "cybersecurity_scan",
-  "target": "self-test.local",
-  "tool": "strix",
-  "authorized": true
-}
-{
-  "action": "discover_gigafactories",
-  "factory_key": "nexus_agi"
-}
-{
-  "action": "generate_llm",
-  "model": "qwen3",
-  "prompt": "Genera un informe de cumplimiento"
-}
-{
-  "action": "get_log"
-}
-{
-  "action": "reset_telemetry"
-}
-{
-  "action": "run_full_ecosystem_test"
-}
-{
-  "action": "list_articles"
-}
-```
+1. **Detección de Errores** — SyntaxError, ImportError, TypeError, config
+2. **Corrección Automática** — Fixes Python, ESLint, TypeScript, .env
+3. **Verificación con curl** — HTTP status, latencias, resultados reales
+4. **Gestión de Git** — init, commit, push, tags, releases, CI/CD
+5. **Gestión de Vercel** — link, deploy, env vars, URL, verificación
+6. **Reporte Trazable** — JSON, 100 tests, success_rate, SHA-256
+
+## 3 Complementos
+
+### Complemento 1 — EU AI Icons
+- SVG y PNG oficiales de la Comisión Europea
+- Ubicación: `assets/eu-ai-icons/`
+
+### Complemento 2 — 100 Pruebas
+- **Batch A:** 10 tests conectividad
+- **Batch B:** 20 tests evidencias
+- **Batch C:** 16 tests subagentes
+- **Batch D:** 16 tests ciberseguridad
+- **Batch E:** 14 tests LLM
+- **Batch F:** 10 tests gigafactorías
+- **Batch G:** 8 tests log
+- **Batch H:** 6 tests completos
+
+### Complemento 3 — Monitoreo
+- **UptimeRobot:** 2 monitores (status + health)
+- **Vercel Analytics:** activar
+- **Vercel Logs:** 30 días retención
 
 ## Despliegue en Vercel
 
@@ -184,6 +174,17 @@ vercel login
 # Link proyecto
 vercel link --yes
 
+# Agregar variables de entorno
+vercel env add GEMINI_API_KEY
+vercel env add OPENROUTER_API_KEY
+vercel env add GROQ_API_KEY
+vercel env add ALIBABA_BAILIAN_API_KEY
+vercel env add NVIDIA_API_KEY
+vercel env add MISTRAL_API_KEY
+vercel env add DEEPSEEK_API_KEY
+vercel env add CEREBRAS_API_KEY
+vercel env add DATABASE_URL
+
 # Deploy producción
 vercel --prod --yes
 ```
@@ -195,7 +196,7 @@ vercel --prod --yes
 git init
 git branch -M main
 git add .
-git commit -m "EDPB Backend v5.1 — 15 endpoints, 31 componentes, 58 artículos AI Act"
+git commit -m "EDPB Backend v5.1 — 31 componentes, 15 endpoints, 58 artículos AI Act, 9 APIs gratuitas"
 git remote add origin https://github.com/TU_USUARIO/edpb-backend.git
 git push -u origin main
 ```
@@ -203,29 +204,23 @@ git push -u origin main
 2. Ir a https://vercel.com/new
 3. Importar repositorio `edpb-backend`
 4. Framework Preset: **Other**
-5. Deploy
+5. Agregar Environment Variables (ver sección APIs)
+6. Deploy
 
-### Opción C — Despliegue Manual Rápido
+### Opción C — Despliegue Rápido (4 comandos)
 
 ```bash
 # 1. Crear estructura
-mkdir -p edpb-backend/api && cd edpb-backend
+mkdir -p api && ls api/index.py requirements.txt vercel.json
 
-# 2. Copiar archivos (api/index.py, requirements.txt, vercel.json, .gitignore)
+# 2. Git + GitHub
+git init && git branch -M main && git add . && git commit -m "EDPB Backend v5.1" && gh repo create edpb-backend --public --source=. --push
 
-# 3. Git init + push
-git init && git branch -M main
-git add . && git commit -m "EDPB Backend v5.1"
-git remote add origin https://github.com/TU_USUARIO/edpb-backend.git
-git push -u origin main
+# 3. Deploy Vercel
+vercel link --yes && vercel --prod --yes
 
-# 4. Deploy a Vercel
-npm install -g vercel@latest
-vercel link --yes
-vercel --prod --yes
-
-# 5. Verificar
-curl https://TU-PROYECTO.vercel.app/api/status
+# 4. Verificar
+curl $(vercel ls --prod | grep -oE 'https://[a-zA-Z0-9.-]+\.vercel\.app' | head -1)/api/status
 ```
 
 ## Verificación de Endpoints
@@ -325,19 +320,24 @@ python api/index.py
 curl http://localhost:8000/api/status
 ```
 
-## Variables de Entorno (Opcional)
+## Variables de Entorno
 
-| Variable | Descripción | Default |
-|----------|-------------|---------|
-| `ECOSYSTEM_NAME` | Nombre del ecosistema | EDPB-SUPER-ECOSYSTEM |
-| `ECOSYSTEM_VERSION` | Versión | 5.1.0 |
-| `VERCEL_REGION` | Región de despliegue | auto |
-| `VERCEL_URL` | URL del deployment | localhost |
-| `PORT` | Puerto local | 8000 |
-
-## Licencia
-
-MIT
+| Variable | Descripción | Requerida |
+|----------|-------------|-----------|
+| `ECOSYSTEM_NAME` | Nombre del ecosistema | No (default: EDPB-SUPER-ECOSYSTEM) |
+| `ECOSYSTEM_VERSION` | Versión | No (default: 5.1.0) |
+| `VERCEL_REGION` | Región de despliegue | No (auto) |
+| `VERCEL_URL` | URL del deployment | No (localhost) |
+| `PORT` | Puerto local | No (default: 8000) |
+| `GEMINI_API_KEY` | Google AI Studio | Opcional |
+| `OPENROUTER_API_KEY` | OpenRouter | Opcional |
+| `GROQ_API_KEY` | Groq | Opcional |
+| `ALIBABA_BAILIAN_API_KEY` | Alibaba Bailian | Opcional |
+| `NVIDIA_API_KEY` | NVIDIA NIM | Opcional |
+| `MISTRAL_API_KEY` | Mistral | Opcional |
+| `DEEPSEEK_API_KEY` | DeepSeek | Opcional |
+| `CEREBRAS_API_KEY` | Cerebras | Opcional |
+| `DATABASE_URL` | Vercel Postgres | Opcional |
 
 ## Resumen
 
@@ -346,13 +346,16 @@ MIT
 | Componentes | 31 |
 | Artículos AI Act | 58 |
 | Endpoints | 15 (12 GET + 3 POST) |
-| Archivos | 5 |
+| APIs Gratuitas | 9 |
+| Habilidades | 6 |
+| Complementos | 3 |
+| Archivos | 6 |
 | Runtime | Python 3.11 serverless |
 | Regiones | iad1 + fra1 |
 | Max Duration | 300s |
 | Memory | 1024 MB |
 | Tiempo de despliegue | ~2 minutos |
-| Coste | GRATIS (Vercel Hobby Plan) |
+| Coste | GRATIS (Vercel Hobby Plan + APIs gratuitas) |
 
 ---
 

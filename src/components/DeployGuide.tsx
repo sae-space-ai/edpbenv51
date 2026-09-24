@@ -392,6 +392,97 @@ Estado: OPERATIVO EN LA NUBE`}
           </div>
         ))}
       </div>
+
+      {/* APIs Gratuitas */}
+      <div className="bg-gray-900 rounded-xl border border-gray-800 p-6">
+        <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+          <span>🔑</span> 9 APIs Gratuitas Integradas
+        </h3>
+        <p className="text-sm text-gray-400 mb-4">
+          Todas con capa gratuita, sin tarjeta de crédito, y listas para producción.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+          {[
+            { name: 'Google AI Studio', model: 'gemini-3-flash', limit: '15 RPM / 1500 RPD', env: 'GEMINI_API_KEY', color: 'blue' },
+            { name: 'OpenRouter', model: 'qwen3, llama-4', limit: '20 RPM / 50 RPD', env: 'OPENROUTER_API_KEY', color: 'purple' },
+            { name: 'Groq', model: 'llama-3.3-70b', limit: '30 RPM / 14400 RPD', env: 'GROQ_API_KEY', color: 'orange' },
+            { name: 'Alibaba Bailian', model: 'Qwen3, DeepSeek', limit: '70M tokens', env: 'ALIBABA_BAILIAN_API_KEY', color: 'red' },
+            { name: 'NVIDIA NIM', model: 'GLM-5.2, Llama-4', limit: '40 RPM / 1000 RPD', env: 'NVIDIA_API_KEY', color: 'green' },
+            { name: 'Mistral', model: 'mistral-small', limit: '1B tokens/mes', env: 'MISTRAL_API_KEY', color: 'amber' },
+            { name: 'DeepSeek', model: 'deepseek-v3.2', limit: '60 RPM', env: 'DEEPSEEK_API_KEY', color: 'cyan' },
+            { name: 'Cerebras', model: 'llama-3.1-8b', limit: '30 RPM / 14400 RPD', env: 'CEREBRAS_API_KEY', color: 'indigo' },
+            { name: 'Vercel Postgres', model: 'pgvector', limit: '256 MB free', env: 'DATABASE_URL', color: 'emerald' },
+          ].map((api) => (
+            <div key={api.name} className="bg-gray-800/50 rounded-lg border border-gray-700 p-3 hover:border-gray-600 transition-all">
+              <div className="flex items-center justify-between mb-2">
+                <h4 className="text-sm font-semibold text-white">{api.name}</h4>
+                <span className={`text-xs px-1.5 py-0.5 rounded bg-${api.color}-500/20 text-${api.color}-400`}>
+                  FREE
+                </span>
+              </div>
+              <p className="text-xs text-gray-400 mb-1">Modelo: <span className="text-gray-300 font-mono">{api.model}</span></p>
+              <p className="text-xs text-gray-400 mb-1">Límite: <span className="text-gray-300">{api.limit}</span></p>
+              <p className="text-xs text-gray-500 font-mono truncate">{api.env}</p>
+            </div>
+          ))}
+        </div>
+        <div className="mt-4 p-3 bg-gray-800/30 rounded-lg border border-gray-700">
+          <p className="text-xs text-gray-400">
+            <span className="text-cyan-400 font-semibold">Configurar en Vercel:</span>{' '}
+            <code className="text-cyan-300 font-mono">vercel env add [VARIABLE_NAME]</code>
+          </p>
+        </div>
+      </div>
+
+      {/* Habilidades y Complementos */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="bg-gray-900 rounded-xl border border-gray-800 p-6">
+          <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+            <span>🎯</span> 6 Habilidades del Arquitecto
+          </h3>
+          <div className="space-y-3">
+            {[
+              { num: 1, name: 'Detección de Errores', desc: 'SyntaxError, ImportError, TypeError, config' },
+              { num: 2, name: 'Corrección Automática', desc: 'Fixes Python, ESLint, TypeScript, .env' },
+              { num: 3, name: 'Verificación con curl', desc: 'HTTP status, latencias, resultados reales' },
+              { num: 4, name: 'Gestión de Git', desc: 'init, commit, push, tags, releases, CI/CD' },
+              { num: 5, name: 'Gestión de Vercel', desc: 'link, deploy, env vars, URL, verificación' },
+              { num: 6, name: 'Reporte Trazable', desc: 'JSON, 100 tests, success_rate, SHA-256' },
+            ].map((skill) => (
+              <div key={skill.num} className="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-800/30 transition-colors">
+                <div className="w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold flex-shrink-0">
+                  {skill.num}
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-white">{skill.name}</p>
+                  <p className="text-xs text-gray-400">{skill.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="bg-gray-900 rounded-xl border border-gray-800 p-6">
+          <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+            <span>🧩</span> 3 Complementos
+          </h3>
+          <div className="space-y-4">
+            <div className="p-3 bg-gray-800/50 rounded-lg border border-gray-700">
+              <h4 className="text-sm font-semibold text-purple-400 mb-1">Complemento 1 — EU AI Icons</h4>
+              <p className="text-xs text-gray-400">SVG y PNG oficiales de la Comisión Europea</p>
+              <p className="text-xs text-gray-500 mt-1 font-mono">assets/eu-ai-icons/</p>
+            </div>
+            <div className="p-3 bg-gray-800/50 rounded-lg border border-gray-700">
+              <h4 className="text-sm font-semibold text-amber-400 mb-1">Complemento 2 — 100 Pruebas</h4>
+              <p className="text-xs text-gray-400">8 batches: conectividad, evidencias, subagentes, ciberseguridad, LLM, gigafactorías, logs, completos</p>
+            </div>
+            <div className="p-3 bg-gray-800/50 rounded-lg border border-gray-700">
+              <h4 className="text-sm font-semibold text-green-400 mb-1">Complemento 3 — Monitoreo</h4>
+              <p className="text-xs text-gray-400">UptimeRobot (2 monitores), Vercel Analytics, Vercel Logs (30 días)</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
